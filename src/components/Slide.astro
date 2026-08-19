@@ -46,6 +46,17 @@ const { slide, index, total } = Astro.props;
           ))}
         </ul>
       )}
+
+      {slide.milestones && slide.milestones.length > 0 && (
+        <ul class="milestones">
+          {slide.milestones.map((milestone) => (
+            <li>
+              <p class="milestone-when" set:html={milestone.when} />
+              <p class="milestone-what" set:html={milestone.what} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
 
     <figure class="slide-art">
