@@ -19,32 +19,38 @@ const { slide, index, total } = Astro.props;
     <img class="logo" src="/logo.png" alt="FINN FLARE" />
   </header>
 
-  <div class="slide-body">
-    <p class="kicker">{slide.kicker}</p>
-    <h2 class="title" set:html={slide.title.replaceAll("\n", "<br />")} />
+  <div class="slide-layout">
+    <div class="slide-body">
+      <p class="kicker">{slide.kicker}</p>
+      <h2 class="title" set:html={slide.title.replaceAll("\n", "<br />")} />
 
-    {slide.lead && <p class="lead" set:html={slide.lead} />}
+      {slide.lead && <p class="lead" set:html={slide.lead} />}
 
-    {slide.links && slide.links.length > 0 && (
-      <div class="links">
-        {slide.links.map((link) => (
-          <a href={link.href} target="_blank" rel="noreferrer">
-            {link.label}
-          </a>
-        ))}
-      </div>
-    )}
+      {slide.links && slide.links.length > 0 && (
+        <div class="links">
+          {slide.links.map((link) => (
+            <a href={link.href} target="_blank" rel="noreferrer">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
 
-    {slide.items && slide.items.length > 0 && (
-      <ul class="items">
-        {slide.items.map((item, i) => (
-          <li>
-            <span>{String(i + 1).padStart(2, "0")}</span>
-            <p set:html={item} />
-          </li>
-        ))}
-      </ul>
-    )}
+      {slide.items && slide.items.length > 0 && (
+        <ul class="items">
+          {slide.items.map((item, i) => (
+            <li>
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              <p set:html={item} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    <figure class="slide-art">
+      <img src={slide.art} alt={slide.artAlt} />
+    </figure>
   </div>
 
   <footer class="status">

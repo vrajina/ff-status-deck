@@ -18,16 +18,20 @@ export interface Slide {
   lead?: string;
   items?: string[];
   links?: { label: string; href: string }[];
+  art: string;
+  artAlt: string;
 }
 
 export const slides: Slide[] = [
   {
     id: "cover",
     kicker: t("Статус разработки нового сайта FINN FLARE"),
-    title: t("Фундамент заложен, чекаут ещё в работе"),
+    title: t("Фундамент заложен, фронтенд и чекаут ещё в работе"),
     lead: t(
       "Есть живой dev-стенд, админка и черновой каталог с товарами. Данных из 1С пока нет: прямой интеграции с ERP нет. Дорабатываем бэкенд карточки товара, затем корзина и чекаут.",
     ),
+    art: "/flerik/bricks.jpg",
+    artAlt: t("Флэрик кладёт кирпичную кладку"),
   },
   {
     id: "stand",
@@ -40,6 +44,8 @@ export const slides: Slide[] = [
       { label: t("Витрина"), href: "https://newstage.finn-flare.ru/" },
       { label: t("Админка"), href: "https://newstage.finn-flare.ru/admin/" },
     ],
+    art: "/flerik/scaffold.jpg",
+    artAlt: t("Флэрик у недостроенного каркаса дома"),
   },
   {
     id: "now",
@@ -56,6 +62,8 @@ export const slides: Slide[] = [
         "Ещё есть карточки товаров, наличие в магазинах, избранное и корзина с синхронизацией между устройствами — задел под своё приложение.",
       ),
     ],
+    art: "/flerik/checklist.jpg",
+    artAlt: t("Флэрик-прораб с заполненным чеклистом"),
   },
   {
     id: "auth",
@@ -68,6 +76,8 @@ export const slides: Slide[] = [
       ),
       t("Позже прикрутим авторизационные сервисы, например Сбер ID."),
     ],
+    art: "/flerik/birdhouse.jpg",
+    artAlt: t("Флэрик мастерит скворечник"),
   },
   {
     id: "frontend",
@@ -80,6 +90,8 @@ export const slides: Slide[] = [
         "Цена вопроса — 150 000 ₽ на 2–3 месяца через самозанятость. Возможно и дальнейшее сотрудничество.",
       ),
     ],
+    art: "/flerik/facade.jpg",
+    artAlt: t("Флэрик расстроен кривым фасадом"),
   },
   {
     id: "erp",
@@ -91,6 +103,8 @@ export const slides: Slide[] = [
       ),
       t("Предложение: подключить внешние ресурсы на эту задачу."),
     ],
+    art: "/flerik/wires.jpg",
+    artAlt: t("Флэрик не может соединить короткие провода"),
   },
   {
     id: "plan",
@@ -109,6 +123,8 @@ export const slides: Slide[] = [
         "Дальше — развитие: Retail Rocket для товарных рекомендаций и Sailplay для программы лояльности.",
       ),
     ],
+    art: "/flerik/blueprint.jpg",
+    artAlt: t("Флэрик с чертежом дома"),
   },
   {
     id: "links",
@@ -118,5 +134,7 @@ export const slides: Slide[] = [
       { label: t("Витрина"), href: "https://newstage.finn-flare.ru/" },
       { label: t("Админка"), href: "https://newstage.finn-flare.ru/admin/" },
     ],
+    art: "/flerik/invite.jpg",
+    artAlt: t("Флэрик приглашает заглянуть внутрь"),
   },
 ];
