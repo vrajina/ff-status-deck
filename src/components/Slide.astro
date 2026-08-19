@@ -1,0 +1,62 @@
+---
+import type { Slide } from "../data/slides";
+
+interface Props {
+  slide: Slide;
+  index: number;
+  total: number;
+}
+
+const { slide, index, total } = Astro.props;
+const invertLogo = slide.theme === "black" || slide.theme === "red";
+---
+
+<section
+  class:list={["slide", `theme-${slide.theme}`, { "is-active": index === 0 }]}
+  data-slide={index}
+  aria-hidden={index === 0 ? "false" : "true"}
+>
+  <header class="frame-top">
+    <img class:list={["logo", { "logo-light": invertLogo }]} src="/logo.png" alt="FINN FLARE" />
+    <p>{slide.kicker}</p>
+  </header>
+
+  <div class="slide-body">
+    <p class="kicker">{slide.kicker}</p>
+    <h2 class="title" set:html={slide.title.replaceAll("\n", "<br />")} />
+
+    {slide.lead && <p class="lead">{slide.lead}</p>}
+
+    {slide.links && slide.links.length > 0 && (
+      <div class="links">
+        {slide.links.map((link) => (
+          <a href={link.href} target="_blank" rel="noreferrer">
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {slide.extras && slide.extras.length > 0 && (
+      <ul class="extras">
+        {slide.extras.map((item) => <li>{item}</li>)}
+      </ul>
+    )}
+
+    {slide.items && slide.items.length > 0 && (
+      <ul class="items">
+        {slide.items.map((item, i) => (
+          <li>
+            <span>{String(i + 1).padStart(2, "0")}</span>
+            <p>{item}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+
+  <footer class="status">
+    <span>{slide.status}</span>
+    <span>{index + 1} / {total}</span>
+  </footer>
+</section>

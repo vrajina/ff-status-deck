@@ -1,0 +1,77 @@
+---
+import Slide from "../components/Slide.astro";
+import { slides } from "../data/slides";
+import "../styles/deck.css";
+---
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>FINN FLARE — статус новой витрины</title>
+    <meta
+      name="description"
+      content="Короткий статус новой витрины FINN FLARE: что уже есть, какие проблемы, что дальше."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="deck" id="deck">
+      {slides.map((slide, index) => (
+        <Slide slide={slide} index={index} total={slides.length} />
+      ))}
+    </main>
+
+    <nav class="nav" aria-label="Слайды">
+      <button type="button" id="prev">Назад</button>
+      <p id="progress">1 / {slides.length}</p>
+      <button type="button" id="next">Дальше</button>
+    </nav>
+
+    <script>
+      const slides = [...document.querySelectorAll<HTMLElement>(".slide")];
+      const progress = document.getElementById("progress");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      let index = 0;
+
+      function show(nextIndex: number) {
+        index = (nextIndex + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          const active = i === index;
+          slide.classList.toggle("is-active", active);
+          slide.setAttribute("aria-hidden", active ? "false" : "true");
+        });
+        if (progress) progress.textContent = `${index + 1} / ${slides.length}`;
+      }
+
+      prev?.addEventListener("click", () => show(index - 1));
+      next?.addEventListener("click", () => show(index + 1));
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === " ") {
+          event.preventDefault();
+          show(index + 1);
+        }
+        if (event.key === "ArrowLeft") show(index - 1);
+      });
+
+      let touchX = 0;
+      document.addEventListener("touchstart", (event) => {
+        touchX = event.changedTouches[0].screenX;
+      });
+      document.addEventListener("touchend", (event) => {
+        const delta = event.changedTouches[0].screenX - touchX;
+        if (delta < -40) show(index + 1);
+        if (delta > 40) show(index - 1);
+      });
+    </script>
+  </body>
+</html>
