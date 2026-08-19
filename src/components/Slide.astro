@@ -8,16 +8,15 @@ interface Props {
 }
 
 const { slide, index, total } = Astro.props;
-const invertLogo = slide.theme === "red";
 ---
 
 <section
-  class:list={["slide", `theme-${slide.theme}`, { "is-active": index === 0 }]}
+  class:list={["slide", { "is-active": index === 0 }]}
   data-slide={index}
   aria-hidden={index === 0 ? "false" : "true"}
 >
   <header class="frame-top">
-    <img class:list={["logo", { "logo-light": invertLogo }]} src="/logo.png" alt="FINN FLARE" />
+    <img class="logo" src="/logo.png" alt="FINN FLARE" />
     <p>{slide.kicker}</p>
   </header>
 
@@ -35,12 +34,6 @@ const invertLogo = slide.theme === "red";
           </a>
         ))}
       </div>
-    )}
-
-    {slide.extras && slide.extras.length > 0 && (
-      <ul class="extras">
-        {slide.extras.map((item) => <li>{item}</li>)}
-      </ul>
     )}
 
     {slide.items && slide.items.length > 0 && (
