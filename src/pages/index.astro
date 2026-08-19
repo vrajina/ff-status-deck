@@ -63,6 +63,22 @@ import "../styles/deck.css";
         if (event.key === "ArrowLeft") show(index - 1);
       });
 
+      let wheelLock = false;
+      document.addEventListener(
+        "wheel",
+        (event) => {
+          if (Math.abs(event.deltaY) < 12) return;
+          event.preventDefault();
+          if (wheelLock) return;
+          wheelLock = true;
+          show(event.deltaY > 0 ? index + 1 : index - 1);
+          window.setTimeout(() => {
+            wheelLock = false;
+          }, 420);
+        },
+        { passive: false },
+      );
+
       let touchX = 0;
       document.addEventListener("touchstart", (event) => {
         touchX = event.changedTouches[0].screenX;

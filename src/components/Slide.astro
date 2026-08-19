@@ -17,14 +17,13 @@ const { slide, index, total } = Astro.props;
 >
   <header class="frame-top">
     <img class="logo" src="/logo.png" alt="FINN FLARE" />
-    <p>{slide.kicker}</p>
   </header>
 
   <div class="slide-body">
     <p class="kicker">{slide.kicker}</p>
     <h2 class="title" set:html={slide.title.replaceAll("\n", "<br />")} />
 
-    {slide.lead && <p class="lead">{slide.lead}</p>}
+    {slide.lead && <p class="lead" set:html={slide.lead} />}
 
     {slide.links && slide.links.length > 0 && (
       <div class="links">
@@ -41,7 +40,7 @@ const { slide, index, total } = Astro.props;
         {slide.items.map((item, i) => (
           <li>
             <span>{String(i + 1).padStart(2, "0")}</span>
-            <p>{item}</p>
+            <p set:html={item} />
           </li>
         ))}
       </ul>
@@ -49,7 +48,6 @@ const { slide, index, total } = Astro.props;
   </div>
 
   <footer class="status">
-    <span>{slide.status}</span>
     <span>{index + 1} / {total}</span>
   </footer>
 </section>
